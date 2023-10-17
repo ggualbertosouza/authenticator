@@ -1,55 +1,57 @@
 "use client";
-import SignIn from "@/app/(authentication)/signin/page";
+
+// Hookes | components
+import { useLogin } from "@/components/Forms/LoginForm/useLogin";
 import { GoogleSignInButton } from "@/components/Button/socialSignIn";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-
-// Schema
-const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(4, "Senha incorreta").max(16, "Senha incorreta"),
-});
-
-// Typeof schema
-type schemaProps = z.infer<typeof schema>;
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export const LoginForm = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<schemaProps>({
-    mode: "all",
-    criteriaMode: "all",
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-
+  const { errors, handleLogin, handleSubmit, register } = useLogin();
   return (
-    <section>
-      <form onSubmit={handleSubmit(() => console.log(watch("email")))}>
-        <Label>Email:</Label>
-        <Input
-          {...register("email")}
-          type="email"
-          error={errors.email?.message}
-        />
-
-        <Label>Password:</Label>
-        <Input
-          {...register("password")}
-          type="password"
-          error={errors.password?.message}
-        />
-        <Button onClick={() => SignIn()}>Login</Button>
-      </form>
-        <GoogleSignInButton />
-    </section>
+    <Card className="w-[350px]">
+      <CardHeader>
+        <CardTitle>Login</CardTitle>
+        <CardDescription>Glad you`re back!</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit(() => handleLogin())}>
+          <div className="grid w-full items-center gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="email">Email:</Label>
+              <Input
+                {...register("email")}
+                type="email"
+                error={errors.email?.message}
+              />
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="password">Password:</Label>
+              <Input
+                {...register("password")}
+                type="password"
+                error={errors.password?.message}
+              />
+            </div>
+            <Button onClick={() => handleLogin()}>Login</Button>
+          </div>
+        </form>
+      </CardContent>
+      <CardFooter className="flex flex-col gap-3">
+        <p className="text-center">Or</p>
+        <div className="flex gap-2 items-center">
+          <GoogleSignInButton />
+        </div>
+      </CardFooter>
+    </Card>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
-import { LoginButton } from "@/components/Button/Login";
-import { useSession } from "next-auth/react";
+import { Button } from "@/components/ui/button";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export const Profile = () => {
   const { data: session, status } = useSession();
@@ -8,18 +8,21 @@ export const Profile = () => {
   if (status === "authenticated") {
     return (
       <section className="flex items-center justify-center gap-2">
-        <p>{session.user?.name}</p>
         <div className="rounded-full overflow-hidden">
           <img src={session.user?.image} alt="" width={30} height={30} />
         </div>
+        <Button
+          variant="secondary"
+          onClick={() => signOut({ callbackUrl: "http://localhost:3000/" })}
+        >
+          SingOut
+        </Button>
       </section>
     );
   }
   return (
     <section>
-        <button>
-            login
-        </button>
+      <Button onClick={() => signIn()}>login</Button>
     </section>
   );
 };

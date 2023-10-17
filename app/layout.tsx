@@ -19,8 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-br">
-      <body className={`${roboto.className} flex flex-col items-center min-h-screen`}>
+    <html lang="pt-br" suppressHydrationWarning>
+      <body
+        className={`${roboto.className} flex flex-col items-center min-h-screen py-2`}
+      >
         <Provider>
           <ThemeProvider
             attribute="class"
@@ -28,12 +30,14 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <header className="container">
+            <header className="container flex items-center">
               <Header />
             </header>
-            <main className="container">
-            {children}
-            </main>
+            <main className="grow container flex items-center">
+              <section className="flex items-center justify-center h-full w-full">
+              {children}
+              </section>
+              </main>
           </ThemeProvider>
         </Provider>
       </body>

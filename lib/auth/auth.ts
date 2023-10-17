@@ -1,7 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { signIn } from "next-auth/react";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -17,16 +16,34 @@ export const authOptions: NextAuthOptions = {
         password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
-        const user = { email: "teste@teste.com", password: "123456" };
+        // const response = await fetch("http:localhost:3000/login", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     email: credentials?.email,
+        //     passsword: credentials?.password,
+        //   }),
+        // });
+
+        // const user = await response.json();
+
+        //   if (user && response.ok) {
+        //     return user;
+        //   }
+        //   return null;
+        // },
+
+        const user = { email: "teste@teste.com", password: "12345678" };
 
         if (user) {
           return user;
         }
         return null;
-      },
-    }),
+      }}),
   ],
   pages: {
-    signIn: "/login",
+    signIn: "/signin",
   },
 };
