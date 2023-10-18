@@ -12,7 +12,7 @@ export const ProfileButton = () => {
    if(status === 'authenticated'){
     return(
         <>
-        <Link href='/user'>Profile</Link>
+        <Link href='/user' className="hover:opacity-60">Profile</Link>
         </>
     )
    }

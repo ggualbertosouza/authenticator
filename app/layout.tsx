@@ -35,9 +35,9 @@ export default function RootLayout({
             </header>
             <main className="grow container flex items-center">
               <section className="flex items-center justify-center h-full w-full">
-              {children}
+                {children}
               </section>
-              </main>
+            </main>
           </ThemeProvider>
         </Provider>
       </body>

@@ -12,7 +12,7 @@ export default function Header() {
     <section className="flex items-center justify-between w-full">
       <h2 className="text-xl text-primary">LinksTREE</h2>
       <div className="flex items-center gap-3">
-       {status && <Link href="/" className="text-md hover:text-secondary">
+       {status && <Link href="/" className="text-md hover:opacity-60">
           Home
         </Link>}
         <ProfileButton />
