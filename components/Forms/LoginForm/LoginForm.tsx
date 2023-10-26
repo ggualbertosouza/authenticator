@@ -14,9 +14,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Loader2 } from "lucide-react";
 
 export const LoginForm = () => {
-  const { errors, handleLogin, handleSubmit, register } = useLogin();
+
+  const { errors, handleLogin, handleSubmit, register, isSubmitting } = useLogin();
+
   return (
     <Card className="w-[350px]">
       <CardHeader>
@@ -31,6 +34,7 @@ export const LoginForm = () => {
               <Input
                 {...register("email")}
                 type="email"
+                disabled={isSubmitting}
                 error={errors.email?.message}
               />
             </div>
@@ -39,10 +43,14 @@ export const LoginForm = () => {
               <Input
                 {...register("password")}
                 type="password"
+                disabled={isSubmitting}
                 error={errors.password?.message}
               />
             </div>
-            <Button onClick={() => handleLogin()}>Login</Button>
+            <Button variant={isSubmitting ? 'ghost' : 'default'} onClick={() => handleLogin()} disabled={isSubmitting}>
+              {isSubmitting && <span className="animate-spin w-4 h-4"><Loader2 /></span>}
+              Login
+              </Button>
           </div>
         </form>
       </CardContent>

@@ -7,7 +7,7 @@ export const useRegister = () => {
     register,
     watch,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<schemaProps>({
     mode: "all",
     criteriaMode: "all",
@@ -22,8 +22,20 @@ export const useRegister = () => {
   const userData = watch("email");
 
   // Função responsável por mandar os dados de cadastro par ao back end
-  const handleRegister = () => {
-    alert(userData)
+  const handleRegister = async (data: schemaProps) => {
+    const request = await fetch('/api/auth',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    const response = await request.json()
+    console.log('USER register form', response)
+
+    if(!request.ok){
+      console.log('Erro no registro!')
+    }
   };
 
   return {
@@ -31,6 +43,7 @@ export const useRegister = () => {
     watch,
     handleSubmit,
     errors,
+    isSubmitting,
     handleRegister,
   };
 };

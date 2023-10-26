@@ -4,9 +4,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRegister } from "@/components/Forms/RegisterForm/useRegister";
+import {Loader2} from 'lucide-react'
 
 export const RegisterForm = () => {
-  const { errors, register, handleSubmit, handleRegister } = useRegister();
+  const { errors, register, handleSubmit, handleRegister, isSubmitting } = useRegister();
   return (
     <>
       <form onSubmit={handleSubmit(handleRegister)}>
@@ -14,6 +15,7 @@ export const RegisterForm = () => {
         <Input
           {...register("username")}
           type="text"
+          disabled={isSubmitting}
           error={errors.username?.message}
         />
 
@@ -21,6 +23,7 @@ export const RegisterForm = () => {
         <Input
           {...register("email")}
           type="text"
+          disabled={isSubmitting}
           error={errors.email?.message}
         />
 
@@ -28,9 +31,11 @@ export const RegisterForm = () => {
         <Input
           {...register("password")}
           type="password"
+          disabled={isSubmitting}
           error={errors.password?.message}
         />
-        <Button onClick={() => handleRegister} type="submit">
+        <Button variant={isSubmitting ? 'ghost' : 'default'} onClick={() => handleRegister} disabled={isSubmitting} type="submit">
+          {isSubmitting && <span className="animate-spin mr-1"><Loader2 /></span>}
           Registrar
         </Button>
       </form>

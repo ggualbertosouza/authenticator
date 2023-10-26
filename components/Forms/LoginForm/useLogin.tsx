@@ -8,7 +8,7 @@ export const useLogin = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<schemaProps>({
     mode: "all",
     criteriaMode: "all",
@@ -29,6 +29,7 @@ export const useLogin = () => {
     register,
     handleSubmit,
     errors,
+    isSubmitting,
     handleLogin,
   };
 };

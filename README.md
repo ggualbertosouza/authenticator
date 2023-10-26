@@ -9,6 +9,10 @@
 ## Tecnologias usadas
 <img src="https://skillicons.dev/icons?i=nextjs,typescript,tailwindcss,html,prisma,mongodb" />
 
+      ### Libs
+      - ShadcnUi (Não é bem uma lib)
+      - Tailwind merge
+
 ## Principais features
 - Registrar e logar usuário
 - Hospedar links das suas redes sociais
